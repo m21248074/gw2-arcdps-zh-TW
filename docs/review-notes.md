@@ -5,31 +5,25 @@
 
 | 編號 | 鍵名 | 官方英文 | 目前譯文 | 疑點 | 建議譯文 |
 |---|---|---|---|---|---|
-| 136 | SKILLS_HITSCOMPRESS | hits (not-aoe) | 擊中(脈衝) | 「脈衝」與 not-aoe 不同 | 擊中(非範圍) |
 | 200 | WINDOW_DPS_HEADER | Chat Stats | 個人統計 | 官方是 Chat(聊天輸出)統計 | 聊天統計 |
 | 240 | WINDOW_SKILLS_HEADER | Chat Skills | 個人技能 | 同上 | 聊天技能 |
-| 428 | WINDOW_LOG_CBTACTIVATION | activation | 戰鬥啟用 | 可能是「技能啟用」 | 技能啟用 |
 | 506 | WINDOW_OPTIONS_SAVELOGS | save boss logs | 對目標保存戰鬥日誌 | 「目標」與 boss 的對應 | 儲存 Boss 日誌 |
 | 542 | WINDOW_OPTIONS_OPENLOGSFOLDER | open | 開啟日誌的儲存目錄 | 官方只是按鈕上的「開啟」 | 開啟 |
 | 697 | COMMON_LABELS | default title | 標籤 | 英文是「預設標題」 | 預設標題 |
 | 718 | COMMON_SHOWADVANCEDSTYLEOPTSPREC | Colours | 載入時,設定檔(.ini)定義的顏色會優先使用 | 官方只有「顏色」 | 顏色 |
 | 733 | COMMON_SORTSTATS | stats | DPS進階排序 | | 統計 |
-| 762 | COMMON_OPTSTYLE_DATA | Data | 傷害統計顯示 | | 數據 |
 | 794 | COMMON_BUFFTOTAL | buffs total | Buff 總計算時間 | | 增益總計 |
-| 831 | COMMON_DODGEUPTIME | dodge uptime | 翻滾率 | 「覆蓋率」較貼近 uptime | 閃避覆蓋率 |
-| 832 | COMMON_SORTADV_STRIPPERSIST | Strips | 移除增益平均值 | 「平均值」是否為 normalized | 拔增益 |
-| 887 | | Unsupported | 不支持,不能使用 Shift | 比官方多出說明 | 不支援 |
-| 922 | COMMON_OPTSHISTORICALINFO | Fights | 歷史記錄 | | 戰鬥 |
 | 949 | | don't highlight selected player colour | 不要修改選擇的顏色 | | 不突顯所選玩家的顏色 |
-| 1005 | COMMON_USEHITSBOSS | use hits boss | 被擊打 Boss | | 使用對 Boss 的擊中 |
 | 1007 | | save instanced map logs | 每次切換地圖後儲存日誌 | 「副本地圖」被省略 | 儲存副本地圖日誌 |
 | 1044 | COMMON_TARGETBAR | target bar | 不顯示目標總傷害條形圖 | 官方沒有「不顯示」 | 目標長條 |
 | 1045 | COMMON_CLEAVEBAR | cleave bar | 不顯示範圍總傷害條形圖 | 同上 | 範圍長條 |
 | 1174 | COMMON_TIMERANGEFULL_SHORT | a | f | 單字母縮寫,英文是 a | `;1174=a`(照慣例以 `;` 註解,保留英文) |
 | 1267 | | Secondary target\nWill not start new logs but will be included in vs target stats | 次要目標 | 缺少第二行說明 | 次要目標\n不會開始新的日誌,但會計入 vs 目標統計 |
 
+已依鍵名上下文確認並修改:136、428、762、831、832、833、887、922、1005。
+
 備註:
-- 733、762 的鍵名不足以判斷畫面位置,建議譯文只是直譯;762 與 696(`Data` → 數據)對齊。
+- 733 的鍵名不足以判斷畫面位置,建議譯文只是直譯。
 - 1044、1045 若遊戲中這兩項是「隱藏」類核取方塊,原譯文的「不顯示」可能是對的,建議看畫面再決定。
 - 200、240 若實際是顯示在聊天輸出的視窗標題,「聊天統計」才正確;若是個人統計視窗,保留現狀。
 
