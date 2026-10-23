@@ -13,25 +13,29 @@ SRC_INI = ROOT / 'lang' / 'zh-TW.ini'
 DIST_INI = ROOT / 'dist' / 'arcdps_lang.ini'
 
 
-def read_official():
+def parse_official(enum_text, default_text):
     """Return {id: (key, english)} for every entry that has a default string."""
     num, cur = {}, -1
-    for line in (OFFICIAL / 'enum.c').read_text(encoding='utf-8', errors='replace').splitlines():
+    for line in enum_text.splitlines():
         line = re.sub(r'/\*.*?\*/', '', line.split('//')[0]).strip()
         m = re.match(r'(LANG_\w+)\s*(?:=\s*(\d+))?\s*,?$', line)
         if m:
             cur = int(m.group(2)) if m.group(2) else cur + 1
             num[m.group(1)] = cur
-    text = (OFFICIAL / 'default.c').read_text(encoding='utf-8', errors='replace')
     out = {}
-    for m in re.finditer(r'lang\[(LANG_\w+)\]\s*=\s*("(?:[^"\\]|\\.)*"|0)\s*;', text):
+    for m in re.finditer(r'lang\[(LANG_\w+)\]\s*=\s*("(?:[^"\\]|\\.)*"|0)\s*;', default_text):
         key, val = m.groups()
         text_val = '' if val == '0' else ast.literal_eval(val)
         if key in num and text_val:
             # the ini stores a newline as the two characters backslash + n
             out[num[key]] = (key, text_val.replace('\n', '\\n'))
-
     return out
+
+
+def read_official():
+    """Parse official/enum.c and official/default.c."""
+    return parse_official((OFFICIAL / 'enum.c').read_text(encoding='utf-8', errors='replace'),
+                          (OFFICIAL / 'default.c').read_text(encoding='utf-8', errors='replace'))
 
 
 def read_ini(path=SRC_INI):

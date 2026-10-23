@@ -7,7 +7,7 @@ import re
 import sys
 from collections import defaultdict
 
-from arcdps_lang import ROOT, SRC_INI, read_ini, read_official
+from arcdps_lang import DIST_INI, ROOT, SRC_INI, read_ini, read_official
 
 GLOSSARY = ROOT / 'docs' / 'glossary.tsv'
 
@@ -73,6 +73,36 @@ for i, zh in active.items():
 dup = {en: d for en, d in sorted(by_en.items()) if len(d) > 1}
 
 print(f'official {len(official)} | translated {len(active)} | skipped(;) {len(skipped)}')
+def dist_problems():
+    """Round trip: decode dist/arcdps_lang.ini the way ArcDPS would and compare it with lang/zh-TW.ini."""
+    if not DIST_INI.exists():
+        return ['dist/arcdps_lang.ini does not exist, run scripts/build.py']
+    raw = DIST_INI.read_bytes()
+    problems = []
+    if raw[:2] != b'\xff\xfe':
+        problems.append('missing UTF-16LE byte order mark')
+    if len(raw) % 2:
+        problems.append('odd number of bytes, not valid UTF-16')
+        return problems
+    try:
+        text = raw[2:].decode('utf-16-le')
+    except UnicodeDecodeError as e:
+        return problems + [f'not valid UTF-16LE: {e}']
+    if '﻿' in text:
+        problems.append('stray byte order mark inside the text')
+    if text.count('\n') != text.count('\r\n'):
+        problems.append('contains a bare LF, every line must end with CRLF')
+    expected = SRC_INI.read_text(encoding='utf-8').replace('\r\n', '\n').replace('\n', '\r\n')
+    if text != expected:
+        problems.append('differs from lang/zh-TW.ini, run scripts/build.py')
+    return problems
+
+
+dist_bad = dist_problems()
+
+print(f'\n[dist/arcdps_lang.ini round trip] {len(dist_bad)}')
+for p in dist_bad:
+    print(f'  {p}')
 print(f'\n[malformed lines] {len(malformed)}')
 for n, l in malformed:
     print(f'  line {n}: {l[:60]!r}')
@@ -91,4 +121,4 @@ for en, d in dup.items():
 print(f'\n[same as english] {len(same)}: {same}')
 print(f'\n[id not in official default.c] {len(unknown)}: {unknown}')
 
-sys.exit(1 if malformed or missing or badph or badterm else 0)
+sys.exit(1 if dist_bad or malformed or missing or badph or badterm else 0)
