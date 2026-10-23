@@ -1,31 +1,19 @@
-# 待確認的譯文
+# 待實測確認的譯文
 
-2026-10-23 逐條對照官方 `default.c` 時發現,以下條目與官方英文的語意可能不同,但無法僅從文字判斷,
-需要對照遊戲內畫面。尚未修改。鍵名取自官方 `enum.c`。「建議譯文」是依官方英文直譯的提案,確認後再套用。
+2026-10-23 逐條對照官方 `default.c` 與 `enum.c` 鍵名後,下列條目已依官方英文直譯,但鍵名無法確認它在畫面上的實際位置。
+放進遊戲實測後,若發現不合適再調整。
 
-| 編號 | 鍵名 | 官方英文 | 目前譯文 | 疑點 | 建議譯文 |
-|---|---|---|---|---|---|
-| 200 | WINDOW_DPS_HEADER | Chat Stats | 個人統計 | 官方是 Chat(聊天輸出)統計 | 聊天統計 |
-| 240 | WINDOW_SKILLS_HEADER | Chat Skills | 個人技能 | 同上 | 聊天技能 |
-| 506 | WINDOW_OPTIONS_SAVELOGS | save boss logs | 對目標保存戰鬥日誌 | 「目標」與 boss 的對應 | 儲存 Boss 日誌 |
-| 542 | WINDOW_OPTIONS_OPENLOGSFOLDER | open | 開啟日誌的儲存目錄 | 官方只是按鈕上的「開啟」 | 開啟 |
-| 697 | COMMON_LABELS | default title | 標籤 | 英文是「預設標題」 | 預設標題 |
-| 718 | COMMON_SHOWADVANCEDSTYLEOPTSPREC | Colours | 載入時,設定檔(.ini)定義的顏色會優先使用 | 官方只有「顏色」 | 顏色 |
-| 733 | COMMON_SORTSTATS | stats | DPS進階排序 | | 統計 |
-| 794 | COMMON_BUFFTOTAL | buffs total | Buff 總計算時間 | | 增益總計 |
-| 949 | | don't highlight selected player colour | 不要修改選擇的顏色 | | 不突顯所選玩家的顏色 |
-| 1007 | | save instanced map logs | 每次切換地圖後儲存日誌 | 「副本地圖」被省略 | 儲存副本地圖日誌 |
-| 1044 | COMMON_TARGETBAR | target bar | 不顯示目標總傷害條形圖 | 官方沒有「不顯示」 | 目標長條 |
-| 1045 | COMMON_CLEAVEBAR | cleave bar | 不顯示範圍總傷害條形圖 | 同上 | 範圍長條 |
-| 1174 | COMMON_TIMERANGEFULL_SHORT | a | f | 單字母縮寫,英文是 a | `;1174=a`(照慣例以 `;` 註解,保留英文) |
-| 1267 | | Secondary target\nWill not start new logs but will be included in vs target stats | 次要目標 | 缺少第二行說明 | 次要目標\n不會開始新的日誌,但會計入 vs 目標統計 |
+| 編號 | 鍵名 | 官方英文 | 目前譯文 | 實測時要看什麼 |
+|---|---|---|---|---|
+| 200 | WINDOW_DPS_HEADER | Chat Stats | 聊天統計 | 若這是個人統計視窗的標題,改回「個人統計」 |
+| 240 | WINDOW_SKILLS_HEADER | Chat Skills | 聊天技能 | 同上,改回「個人技能」 |
+| 718 | COMMON_SHOWADVANCEDSTYLEOPTSPREC | Colours | 顏色 | 位於進階樣式的警告文字之後,看是否需要補充說明 |
+| 733 | COMMON_SORTSTATS | stats | 統計 | 位置不明,看實際畫面 |
+| 1044 | COMMON_TARGETBAR | target bar | 目標長條 | 後面接「不影響長條百分比計算」,可能是「不顯示」類選項,原譯文為「不顯示目標總傷害條形圖」 |
+| 1045 | COMMON_CLEAVEBAR | cleave bar | 範圍長條 | 同上 |
+| 1047 | COMMON_NOHIDEZEROBUFFS | hide zero buff columns | 隱藏增益為 0 的欄 | 鍵名帶 NO,方向可能相反,勾選後看實際效果 |
 
-已依鍵名上下文確認並修改:136、428、762、831、832、833、887、922、1005。
-
-備註:
-- 733 的鍵名不足以判斷畫面位置,建議譯文只是直譯。
-- 1044、1045 若遊戲中這兩項是「隱藏」類核取方塊,原譯文的「不顯示」可能是對的,建議看畫面再決定。
-- 200、240 若實際是顯示在聊天輸出的視窗標題,「聊天統計」才正確;若是個人統計視窗,保留現狀。
+`;1174=a` 以註解保留英文,與其他單字母縮寫的慣例一致。
 
 以下 12 個編號在官方 `enum.c` 有定義,但 `default.c` 沒有預設字串,也沒有 `_DEFUNC` 標記,無法確認是否仍在使用,所以保留譯文:
 130–132(SKILLS_TOTAL/H/F)、343、345(TGADPSOUT/IN)、376、377(DETAILS_PHYS/COND)、710(LOGSINVALID)、
