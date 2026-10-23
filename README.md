@@ -19,7 +19,7 @@
 | `official/default.c`、`official/enum.c` | ArcDPS 官方語言來源(英文預設與編號),由 `scripts/fetch.py` 下載 |
 | `docs/glossary.md`、`docs/glossary.tsv` | 術語表。`.tsv` 是 `check.py` 會檢查的規則 |
 | `docs/review-notes.md` | 審閱備忘:已確認的條目、保留的編號、已移除的棄用編號 |
-| `scripts/` | `fetch.py`、`check.py`、`build.py` |
+| `scripts/` | `fetch.py`、`check.py`、`build.py`、`official_diff.py`、`release_notes.py` |
 
 ## 編輯流程
 
@@ -43,11 +43,18 @@ python scripts/build.py        # 產生 dist/arcdps_lang.ini
 
 有漏翻、格式損壞、佔位符不一致或違反術語表時,結束碼為 1。
 
+另外還會把 `dist/arcdps_lang.ini` 解碼回來,檢查 UTF-16LE 編碼、BOM、CRLF 換行,以及內容是否與 `lang/zh-TW.ini` 一致。
+
 ### 檔案格式
 
 - 一行一條:`編號=譯文`。編號對應官方 `enum.c`。
 - 譯文裡的換行寫成兩個字元 `\n`,**不要**輸入真正的換行。
 - `;編號=文字` 表示刻意跳過、保留英文的項目(單字母縮寫等)。
+
+## 官方更新
+
+GitHub Actions 每週一會下載官方語言檔。有變動時會自動開一個 issue,列出新增、英文內容改動、已移除的字串(由 `scripts/official_diff.py` 產生),並附上目前譯文,方便你更新。
+同一份官方檔案只會開一個 issue。處理完執行 `python scripts/fetch.py` 並提交 `official/`,下週就不會再報。
 
 ## 發佈
 

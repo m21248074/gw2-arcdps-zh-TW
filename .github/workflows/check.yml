@@ -19,14 +19,12 @@ jobs:
       - name: Check translation
         run: python scripts/check.py
 
-      - name: dist/arcdps_lang.ini is up to date
-        run: |
-          python scripts/build.py
-          git diff --exit-code -- dist/ || (echo "::error::dist/arcdps_lang.ini is stale, run python scripts/build.py and commit it" && exit 1)
-
   official-updates:
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -36,7 +34,21 @@ jobs:
       - name: Fetch official language files
         run: python scripts/fetch.py
 
-      - name: Fail if the official files changed
+      - name: Open an issue if the official files changed
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
+          if git diff --quiet -- official/; then
+            echo "Official files are unchanged."
+            exit 0
+          fi
           git diff --stat -- official/
-          git diff --exit-code -- official/ || (echo "::error::ArcDPS published new language strings, run scripts/fetch.py and translate them" && exit 1)
+          python scripts/official_diff.py > report.md
+          cat report.md >> "$GITHUB_STEP_SUMMARY"
+          title="官方語言檔更新 ($(sha256sum official/default.c | cut -c1-8))"
+          existing=$(gh issue list --state open --limit 100 --json title --jq "[.[] | select(.title == \"$title\")] | length")
+          if [ "$existing" != "0" ]; then
+            echo "An open issue already exists for this update."
+          else
+            gh issue create --title "$title" --body-file report.md
+          fi
