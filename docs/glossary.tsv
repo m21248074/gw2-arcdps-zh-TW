@@ -22,7 +22,9 @@ avoid	use	exempt_ids	note
 風格	樣式		Style 統一為「樣式」
 擴展插件	擴充插件		Extension 統一為「擴充插件」
 面板	視窗	1328,1329	ArcDPS 的 window 一律叫「視窗」;1328/1329 指遊戲本身的面板
-(?<![A-Za-z])(?:BUFF|buff)(?![A-Za-z])	Buff		英文拼寫統一為 Buff
-Buff(?=[一-鿿])	Buff 		Buff 與中文之間留一個空格
+(?:BUFF|Buff|buff) ?(?=[一-鿿])	增益		Buff 統一為「增益」,與中文相連時不留空格
+(?<![A-Za-z])(?:BUFF|Buff|buff)(?![A-Za-z])	增益		Buff 統一為「增益」
+移除增益	拔增益		strip 統一為「拔增益」
 移除症狀	清除症狀		cleanse=清除症狀;strip=移除/拔增益,兩者不要混用
 過濾	篩選		filter 統一為「篩選」
+(?<=[一-鿿]) (?=增益)			中文與「增益」之間不留空格
