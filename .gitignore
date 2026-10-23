@@ -1,0 +1,3 @@
+# third-party binaries are not part of this repo
+*.dll
+__pycache__/
