@@ -28,3 +28,4 @@ avoid	use	exempt_ids	note
 移除症狀	清除症狀		cleanse=清除症狀;strip=移除/拔增益,兩者不要混用
 過濾	篩選		filter 統一為「篩選」
 (?<=[一-鿿]) (?=增益)			中文與「增益」之間不留空格
+救人	復活		revive/revival/resurrect 統一為「復活」

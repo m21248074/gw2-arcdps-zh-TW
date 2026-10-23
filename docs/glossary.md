@@ -18,7 +18,7 @@
 | crowd control | CC | 例:CC 次數、CC 時長 |
 | minion | 召喚物 | |
 | cleanse | 清除症狀 | 不與 strip 混用 |
-| revival | 復活 | 743、744 已與 1115、1116 對齊(原為「救人」) |
+| revive / revival / resurrect | 復活 | 例:復活觸發次數、復活時長、按 F 復活;不使用「救人」 |
 | log(名詞) | 日誌 | 動詞或「紀錄行為」用「記錄」;「紀錄」一律寫「記錄」 |
 | style | 樣式 | |
 | filter | 篩選 | |
