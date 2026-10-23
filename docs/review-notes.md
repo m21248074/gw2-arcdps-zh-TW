@@ -28,5 +28,9 @@
 | 1174 | COMMON_TIMERANGEFULL_SHORT | a | f | 單字母縮寫,英文是 a |
 | 1267 | | Secondary target\nWill not start new logs but will be included in vs target stats | 次要目標 | 缺少第二行說明 |
 
-另有 31 個編號在官方 `default.c` 沒有對應字串(多為已棄用的 `_DEFUNC` 項目),留在檔案中無害:
-130–132、138–140、147、343、345、370、373、376、377、382、522、543、691、710、781、782、785、811、830、878、902、963、1169–1172、1312。
+以下 13 個編號在官方 `enum.c` 有定義,但 `default.c` 沒有預設字串,也沒有 `_DEFUNC` 標記,無法確認是否仍在使用,所以保留譯文:
+130–132(SKILLS_TOTAL/H/F)、343、345(TGADPSOUT/IN)、376、377(DETAILS_PHYS/COND)、710(LOGSINVALID)、
+781(SHOWADVANCEDFUNCOPTS_TOOLTIP)、782(DRAWCOMPAT)、785(SHOWTARGETINFO)、811(FONTSIZE_DEFAULT)。
+另有被註解的 `;786`(TARGETINFOTARGET)同樣保留。
+
+已棄用(`_DEFUNC`)的 19 條已於 2026-10-23 移除:138–140、147、370、373、382、522、543、691、830、878、902、963、1169–1172、1312。
