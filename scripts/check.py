@@ -54,6 +54,10 @@ if '--fix' in sys.argv:
 official = read_official()
 active, commented = read_ini()
 
+# every line must be blank, a ;comment, [lang] or id=text; anything else is a broken line (e.g. a stray real newline)
+malformed = [(n, l) for n, l in enumerate(SRC_INI.read_text(encoding='utf-8').splitlines(), 1)
+             if l.strip() and not re.match(r'^(;|\[lang\]$|\d+=)', l)]
+
 missing = [(i, k, en) for i, (k, en) in sorted(official.items()) if i not in active and i not in commented]
 skipped = [i for i in sorted(commented) if i in official]
 unknown = [i for i in sorted(active) if i not in official]
@@ -69,6 +73,9 @@ for i, zh in active.items():
 dup = {en: d for en, d in sorted(by_en.items()) if len(d) > 1}
 
 print(f'official {len(official)} | translated {len(active)} | skipped(;) {len(skipped)}')
+print(f'\n[malformed lines] {len(malformed)}')
+for n, l in malformed:
+    print(f'  line {n}: {l[:60]!r}')
 print(f'\n[missing] {len(missing)}')
 for i, k, en in missing:
     print(f'  {i}\t{k}\t{en!r}')
@@ -84,4 +91,4 @@ for en, d in dup.items():
 print(f'\n[same as english] {len(same)}: {same}')
 print(f'\n[id not in official default.c] {len(unknown)}: {unknown}')
 
-sys.exit(1 if missing or badph or badterm else 0)
+sys.exit(1 if malformed or missing or badph or badterm else 0)
