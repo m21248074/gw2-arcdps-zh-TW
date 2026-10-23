@@ -31,6 +31,7 @@
 | addon / extension | 外掛 / 擴充插件 | addon 指 ArcDPS 本身(1218「外掛模式」);extension 指其擴充,單獨的「插件」不使用 |
 | 統計數值 / 一般資料 | 數據 / 資料 | 統計數值用「數據」;資料夾、詳細資料、ImGui 資料用「資料」 |
 | profession / elite specialization | 職業 / 專業特化 | |
+| relic | 古物 | 例:Relic of the Thief = 潛行者古物(1179);thief 一律用「潛行者」 |
 
 ## 待決定
 
