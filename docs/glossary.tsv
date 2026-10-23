@@ -31,3 +31,6 @@ avoid	use	exempt_ids	note
 救人	復活		revive/revival/resurrect 統一為「復活」
 重啟	重新啟動		restart 統一為「重新啟動」
 (?<!擴充)插件	擴充插件		「插件」只指 extension;ArcDPS 本身(addon)直接寫 ArcDPS 或「外掛」
+消息	訊息		大陸用語
+列表	清單		統一為「清單」
+高亮	突顯		大陸用語
