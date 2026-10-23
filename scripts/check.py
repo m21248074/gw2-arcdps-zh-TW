@@ -5,7 +5,7 @@ from arcdps_lang import read_ini, read_official
 official = read_official()
 active, commented = read_ini()
 
-PH = re.compile(r'@\d|%[-0-9.lL]*[a-zA-Z]|\\n')
+PH = re.compile(r'@\d|%[-0-9.lL]*[a-zA-Z]')  # newlines are only line wraps, not compared
 
 
 def ph(s):

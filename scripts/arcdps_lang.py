@@ -28,7 +28,9 @@ def read_official():
         key, val = m.groups()
         text_val = '' if val == '0' else ast.literal_eval(val)
         if key in num and text_val:
-            out[num[key]] = (key, text_val)
+            # the ini stores a newline as the two characters backslash + n
+            out[num[key]] = (key, text_val.replace('\n', '\\n'))
+
     return out
 
 
