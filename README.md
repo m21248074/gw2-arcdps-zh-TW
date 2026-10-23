@@ -49,6 +49,19 @@ python scripts/build.py        # 產生 dist/arcdps_lang.ini
 - 譯文裡的換行寫成兩個字元 `\n`,**不要**輸入真正的換行。
 - `;編號=文字` 表示刻意跳過、保留英文的項目(單字母縮寫等)。
 
+## 發佈
+
+推一個 `v` 開頭的 tag,GitHub Actions 會自動檢查、建置,並建立**草稿** release、附上 `dist/arcdps_lang.ini`:
+
+```
+python scripts/check.py && python scripts/build.py   # 確認通過,且 dist/ 已提交
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+到 GitHub 的 Releases 頁面檢查草稿內容,確認後再按 Publish。發佈說明由 `scripts/release_notes.py` 產生,
+「對應 ArcDPS 版本」取自 `docs/arcdps-version.txt`,ArcDPS 更新並重新核對後請一併更新。
+
 ## 版本與來源
 
 ArcDPS 與官方語言來源由 deltaconnected 製作:<https://www.deltaconnected.com/arcdps/translations>。
