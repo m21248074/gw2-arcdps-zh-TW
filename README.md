@@ -18,7 +18,7 @@
 | `dist/arcdps_lang.ini` | 實際使用的檔案,UTF-16LE + BOM、CRLF,由 `scripts/build.py` 產生,**不要手改** |
 | `official/default.c`、`official/enum.c` | ArcDPS 官方語言來源(英文預設與編號),由 `scripts/fetch.py` 下載 |
 | `docs/glossary.md`、`docs/glossary.tsv` | 術語表。`.tsv` 是 `check.py` 會檢查的規則 |
-| `docs/review-notes.md` | 需要看遊戲畫面才能確定的條目 |
+| `docs/review-notes.md` | 審閱備忘:已確認的條目、保留的編號、已移除的棄用編號 |
 | `scripts/` | `fetch.py`、`check.py`、`build.py` |
 
 ## 編輯流程
