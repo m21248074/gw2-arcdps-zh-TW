@@ -1,0 +1,42 @@
+name: check
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 3 * * 1' # every Monday: look for official updates
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Check translation
+        run: python scripts/check.py
+
+      - name: dist/arcdps_lang.ini is up to date
+        run: |
+          python scripts/build.py
+          git diff --exit-code -- dist/ || (echo "::error::dist/arcdps_lang.ini is stale, run python scripts/build.py and commit it" && exit 1)
+
+  official-updates:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch official language files
+        run: python scripts/fetch.py
+
+      - name: Fail if the official files changed
+        run: |
+          git diff --stat -- official/
+          git diff --exit-code -- official/ || (echo "::error::ArcDPS published new language strings, run scripts/fetch.py and translate them" && exit 1)

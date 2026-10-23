@@ -4,6 +4,7 @@ from arcdps_lang import OFFICIAL
 
 BASE = 'https://www.deltaconnected.com/arcdps/translations/'
 for name in ('default.c', 'enum.c'):
-    data = urllib.request.urlopen(BASE + name).read()
+    req = urllib.request.Request(BASE + name, headers={'User-Agent': 'Mozilla/5.0 (gw2-arcdps-zh-TW fetch.py)'})
+    data = urllib.request.urlopen(req).read()
     (OFFICIAL / name).write_bytes(data)
     print(name, len(data), 'bytes')
